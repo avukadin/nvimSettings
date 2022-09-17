@@ -49,9 +49,15 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
+" Debugging
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'mfussenegger/nvim-dap-python'
+
 call plug#end()
 
-" Custom Commands
+" Custom keymaps
 nnoremap <F7> :NvimTreeCollapse<cr> :NvimTreeToggle<cr>
 nmap <F8> :TagbarToggle<CR>
 " Search git files
@@ -70,7 +76,12 @@ inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<
 nnoremap <c-s> :vsp<cr>
 " Get variable/function info
 nnoremap <silent> K :call CocActionAsync("doHover")<CR>
-
+" Debugging
+nnoremap <F5> :lua require'dap'.continue()<cr>
+nnoremap <F9> :lua require'dap'.toggle_breakpoint()<cr>
+nnoremap <F10> :lua require'dap'.step_over()<cr>
+nnoremap <F11> :lua require'dap'.step_into()<cr>
+nnoremap <F6> :lua require'dap'.repl.open()<cr>
 " Color scheme
 colorscheme carbonfox
 
@@ -135,3 +146,21 @@ let g:tagbar_type_typescriptreact = {
 " Settings
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
+
+" Debugging
+lua <<EOF
+require('dap-python').setup('~/environments/debugpy/bin/python') 
+require('dapui').setup()
+require ('nvim-dap-virtual-text').setup()
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+EOF
+
