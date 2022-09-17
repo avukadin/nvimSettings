@@ -1,6 +1,6 @@
 # Setting up NVIM
 1) Download and install iTerm2
-2) Install the JetBrains throuh `Font Book`
+2) Install the JetBrains throuh `Font Book` and set it as the font in iTerm2
 3) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
 4) Open with NVIM and run ```:PlugInstall```
 
