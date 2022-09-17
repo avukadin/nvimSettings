@@ -1,9 +1,7 @@
 # Setting up NVIM
-Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
-Open with NVIM and run 
-```
-:PlugInstall
-```
+1) Download and install iTerm2
+2) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
+3) Open with NVIM and run ```:PlugInstall```
 
 ### Debugger Setup
 #### Python
