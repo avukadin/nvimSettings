@@ -12,6 +12,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ### Code Completion Setup
 Your need node installed:
 ```brew install node```
+cd into  ```~/.local/share/nvim/plugged/coc.nvi``` and run ```yarn install```
 
 You need to install the extentions you need for the language you are using, my setup:
 ```:CocInstall coc-tsserver``` for typescript/javacript
