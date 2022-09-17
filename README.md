@@ -9,7 +9,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 4) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
 5) Open with NVIM (will get some errors) and run ```:PlugInstall```
 
-## Code Completion Setup
+### Code Completion Setup
 Your need node installed:
 ```brew install node```
 
