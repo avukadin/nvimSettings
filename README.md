@@ -1,6 +1,9 @@
 # Setting up NVIM
 Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
-
+Open with NVIM and run 
+```
+:PlugInstall
+```
 
 ### Debugger Setup
 #### Python
