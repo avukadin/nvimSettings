@@ -1,6 +1,6 @@
 # Setting up NVIM
 1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (brew install neovim)
-2) Run the following to install nvim-plug for managing pludings:
+2) Run the following to install nvim-plug for managing plugins:
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -12,7 +12,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ### Code Completion Setup
 Your need node installed:
 ```brew install node```
-cd into  ```~/.local/share/nvim/plugged/coc.nvi``` and run ```yarn install```
+cd into  ```~/.local/share/nvim/plugged/coc.nvim``` and run ```yarn install```
 
 You need to install the extentions you need for the language you are using, my setup:
 ```:CocInstall coc-tsserver``` for typescript/javacript
