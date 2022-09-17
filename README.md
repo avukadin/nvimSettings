@@ -1,7 +1,8 @@
 # Setting up NVIM
 1) Download and install iTerm2
-2) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
-3) Open with NVIM and run ```:PlugInstall```
+2) Install the JetBrains throuh `Font Book`
+3) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
+4) Open with NVIM and run ```:PlugInstall```
 
 ### Debugger Setup
 #### Python
