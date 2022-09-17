@@ -1,8 +1,13 @@
 # Setting up NVIM
 1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (brew install neovim)
-2) Install the JetBrains throuh `Font Book` and set it as the font in iTerm2
-3) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
-4) Open with NVIM and run ```:PlugInstall```
+2) Run the following to install nvim-plug for managing pludings:
+```
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+```
+3) Install the JetBrains throuh `Font Book` and set it as the font in iTerm2
+4) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
+5) Open with NVIM (will get some errors) and run ```:PlugInstall```
 
 ### Debugger Setup
 #### Python
