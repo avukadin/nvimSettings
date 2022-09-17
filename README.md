@@ -9,6 +9,11 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 4) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
 5) Open with NVIM (will get some errors) and run ```:PlugInstall```
 
+## Code Completion Setip
+You need to install the extentions you need for the language you are using, my setup:
+```:CocInstall coc-tsserver``` for typescript/javacript
+```:CocInstall coc-python``` for python
+
 ### Debugger Setup
 #### Python
 1) Install debugpy in a dedicated virtual environment, this is used only for debugpy, see https://github.com/mfussenegger/nvim-dap-python for details.
