@@ -28,3 +28,15 @@ pip3 install debugpy
 ```
 
 The ```require('dap-python').setup('~/environments/debugpy/bin/python')``` will point to the python file.
+
+#### Typescript/Javascript React
+https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#Javascript-chrome
+- git clone https://github.com/Microsoft/vscode-chrome-debug
+- cd ./vscode-chrome-debug
+- npm install
+- npm run build
+Change path in init.vim file to above if needed
+Launch Chrome in debug mode on mac with:
+```
+sudo /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
+```
