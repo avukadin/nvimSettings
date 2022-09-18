@@ -35,8 +35,9 @@ https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#Javascr
 - cd ./vscode-chrome-debug
 - npm install
 - npm run build
-Change path in init.vim file to above if needed
-Launch Chrome in debug mode on mac with:
+
+<br />Change path in init.vim file to above if needed
+<br />Launch Chrome in debug mode on mac with:
 ```
 sudo /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
 ```
