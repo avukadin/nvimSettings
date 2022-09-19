@@ -76,6 +76,8 @@ inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<
 nnoremap <c-s> :vsp<cr>
 " Get variable/function info
 nnoremap <silent> K :call CocActionAsync("doHover")<CR>
+" Exit insert mode
+inoremap jj <ESC>
 " Debugging
 nnoremap <F5> :lua require'dap'.continue()<cr>
 nnoremap <F9> :lua require'dap'.toggle_breakpoint()<cr>
@@ -148,6 +150,7 @@ let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 
 " Debugging
+" Python
 lua <<EOF
 require('dap-python').setup('~/environments/debugpy/bin/python') 
 require('dapui').setup()
@@ -163,4 +166,38 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 EOF
+" React
+lua <<EOF
+local dap = require('dap')
+dap.adapters.chrome = {
+    type = "executable",
+    command = "node",
+    args = {os.getenv("HOME") .. "/Projects/vscode-chrome-debug/out/src/chromeDebug.js"} -- TODO adjust
+}
 
+dap.configurations.javascriptreact = { -- change this to javascript if needed
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}"
+    }
+}
+
+dap.configurations.typescriptreact = { -- change to typescript if needed
+    {
+        type = "chrome",
+        request = "attach",
+        program = "${file}",
+        cwd = vim.fn.getcwd(),
+        sourceMaps = true,
+        protocol = "inspector",
+        port = 9222,
+        webRoot = "${workspaceFolder}"
+    }
+}
+EOF
