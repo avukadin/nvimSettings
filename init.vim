@@ -42,8 +42,9 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --producti
 " Git status
 Plug 'airblade/vim-gitgutter'
 
-" Color Theme
+" Color Themes
 Plug 'EdenEast/nightfox.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Show code context
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -85,7 +86,8 @@ nnoremap <F10> :lua require'dap'.step_over()<cr>
 nnoremap <F11> :lua require'dap'.step_into()<cr>
 nnoremap <F6> :lua require'dap'.repl.open()<cr>
 " Color scheme
-colorscheme carbonfox
+" colorscheme carbonfox
+colorscheme tokyonight-night
 
 " Prettier
 " Run Prettier on Save
