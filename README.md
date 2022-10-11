@@ -8,6 +8,10 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 3) Install the JetBrains throuh `Font Book` and set it as the font in iTerm2
 4) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
 5) Open with NVIM (will get some errors) and run ```:PlugInstall```
+6) Set key bindings in iTerm2 :
+<img width="395" alt="image" src="https://user-images.githubusercontent.com/16506713/191071526-b5814706-1abf-4684-8588-c49c58b8f8dc.png">
+7) run `brew install the_silver_searcher`, this is needed for CtrSF
+8) run `pip3 install jedi`, this is need for coc code completion
 
 ### Code Completion Setup
 Your need node installed:
