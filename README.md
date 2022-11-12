@@ -11,6 +11,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 6) Set key bindings in iTerm2 :
 <img width="413" alt="image" src="https://user-images.githubusercontent.com/16506713/201479613-dec9c091-431e-4d41-a95a-b32d621dbb2e.png">
 7) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
+
 ```
 #determines search program for fzf
 if type ag &> /dev/null; then
