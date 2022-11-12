@@ -9,8 +9,20 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 4) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
 5) Open with NVIM (will get some errors) and run ```:PlugInstall```
 6) Set key bindings in iTerm2 :
-<img width="395" alt="image" src="https://user-images.githubusercontent.com/16506713/191071526-b5814706-1abf-4684-8588-c49c58b8f8dc.png">
-7) run `brew install the_silver_searcher`, this is needed for CtrSF
+<img width="413" alt="image" src="https://user-images.githubusercontent.com/16506713/201479613-dec9c091-431e-4d41-a95a-b32d621dbb2e.png">
+7) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
+```
+#determines search program for fzf
+if type ag &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+fi
+#refer rg over ag
+if type rg &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden'
+fi
+```
+
+
 8) run `pip3 install jedi`, this is need for coc code completion
 
 ### Code Completion Setup
