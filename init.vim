@@ -59,7 +59,7 @@ Plug 'mfussenegger/nvim-dap-python'
 call plug#end()
 
 " Custom keymaps
-nnoremap <F7> :NvimTreeCollapse<cr> :NvimTreeToggle<cr>
+nnoremap <F7> :NvimTreeToggle<cr>
 nmap <F8> :TagbarToggle<CR>
 " Search git files
 nnoremap <c-p> :GFiles<cr>
