@@ -89,6 +89,11 @@ nnoremap <F6> :lua require'dap'.repl.open()<cr>
 " colorscheme carbonfox
 colorscheme tokyonight-night
 
+set clipboard=unnamedplus
+
+" Copy to system clipboard
+set clipboard=unnamedplus
+
 " Prettier
 " Run Prettier on Save
 let g:prettier#autoformat = 1
