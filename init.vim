@@ -62,7 +62,7 @@ call plug#end()
 nnoremap <F7> :NvimTreeToggle<cr>
 nmap <F8> :TagbarToggle<CR>
 " Search git files
-nnoremap <c-p> :GFiles<cr>
+nnoremap <c-p> :Files<cr>
 " Find is case insensitive
 nnoremap / /\c
 " Go to definition
