@@ -45,6 +45,8 @@ Plug 'airblade/vim-gitgutter'
 " Color Themes
 Plug 'EdenEast/nightfox.nvim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'ayu-theme/ayu-vim'
 
 " Show code context
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -79,6 +81,8 @@ nnoremap <c-s> :vsp<cr>
 nnoremap <silent> K :call CocActionAsync("doHover")<CR>
 " Exit insert mode
 inoremap jj <ESC>
+" :OR command to organize imports
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 " Debugging
 nnoremap <F5> :lua require'dap'.continue()<cr>
 nnoremap <F9> :lua require'dap'.toggle_breakpoint()<cr>
@@ -86,8 +90,14 @@ nnoremap <F10> :lua require'dap'.step_over()<cr>
 nnoremap <F11> :lua require'dap'.step_into()<cr>
 nnoremap <F6> :lua require'dap'.repl.open()<cr>
 " Color scheme
-" colorscheme carbonfox
-colorscheme tokyonight-night
+colorscheme carbonfox
+" colorscheme tokyonight-night
+" colorscheme catppuccin
+set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " Copy to system clipboard
 set clipboard=unnamedplus
@@ -95,7 +105,9 @@ set clipboard=unnamedplus
 " Prettier
 " Run Prettier on Save
 let g:prettier#autoformat = 1
+let g:prettier#partial_format=1
 let g:prettier#autoformat_require_pragma = 0
+let g:prettier#exec_cmd_async = 1
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
