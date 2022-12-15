@@ -7,10 +7,12 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 ```
 3) Install the JetBrains throuh `Font Book` and set it as the font in iTerm2
 4) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
-5) Open with NVIM (will get some errors) and run ```:PlugInstall```
-6) Set key bindings in iTerm2 :
+5) Install nodejs (MAC: brew install node, UBUNTU: sudo apt install nodejs)
+6) Install npm and yarn (sudo apt install npm, npm install yarn)
+7) Open with NVIM (will get some errors) and run ```:PlugInstall```
+8) Set key bindings in iTerm2 :
 <img width="413" alt="image" src="https://user-images.githubusercontent.com/16506713/201479613-dec9c091-431e-4d41-a95a-b32d621dbb2e.png">
-7) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
+9) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
 
 ```
 #determines search program for fzf
