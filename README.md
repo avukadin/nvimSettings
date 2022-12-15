@@ -1,5 +1,5 @@
 # Setting up NVIM
-1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (brew install neovim)
+1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (MAC:brew install neovim, UBUNTU: sudo apt install neovim)
 2) Run the following to install nvim-plug for managing plugins:
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
