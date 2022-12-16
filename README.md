@@ -1,5 +1,5 @@
 # Setting up NVIM
-1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (MAC:brew install neovim, On Ubuntu you need to build nvim from source to get the latest version: `sudo apt install gcc`, `pip install cmake` then follow instructions [here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites))
+1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (MAC:brew install neovim, On Ubuntu you need to build nvim from source to get the latest version: `sudo apt install gcc`, `sudo apt  install cmake` then follow instructions [here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites))
 2) Run the following to install nvim-plug for managing plugins:
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
