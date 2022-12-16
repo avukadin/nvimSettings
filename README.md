@@ -12,9 +12,13 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 7) Install npm and yarn (sudo npm install --global yarn)
 
 9) Open with NVIM (will get some errors) and run ```:PlugInstall```
-10) Set key bindings in iTerm2 :
+10) cd into  ```~/.local/share/nvim/plugged/coc.nvim``` and run ```yarn install```
+You need to install the extentions you need for the language you are using, my setup:
+```:CocInstall coc-tsserver``` for typescript/javacript
+```:CocInstall coc-python``` for python
+11) Set key bindings in iTerm2 :
 <img width="413" alt="image" src="https://user-images.githubusercontent.com/16506713/201479613-dec9c091-431e-4d41-a95a-b32d621dbb2e.png">
-10) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
+12) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
 
 ```
 #determines search program for fzf
@@ -28,16 +32,8 @@ fi
 ```
 
 
-8) run `pip3 install jedi`, this is need for coc code completion
+13) run `pip3 install jedi`, this is need for coc code completion
 
-### Code Completion Setup
-Your need node installed:
-```brew install node```
-cd into  ```~/.local/share/nvim/plugged/coc.nvim``` and run ```yarn install```
-
-You need to install the extentions you need for the language you are using, my setup:
-```:CocInstall coc-tsserver``` for typescript/javacript
-```:CocInstall coc-python``` for python
 
 ### Debugger Setup
 #### Python
