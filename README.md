@@ -9,7 +9,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 4) install git and do `git config --global credential.helper store`
 5) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
 6) Install nodejs (MAC: brew install node, UBUNTU: `curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -`, `sudo apt install -y nodejs`)
-7) Install npm and yarn (npm install --global yarn)
+7) Install npm and yarn (sudo npm install --global yarn)
 
 9) Open with NVIM (will get some errors) and run ```:PlugInstall```
 10) Set key bindings in iTerm2 :
