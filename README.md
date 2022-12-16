@@ -1,5 +1,5 @@
 # Setting up NVIM
-1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (MAC:brew install neovim, UBUNTU: sudo apt install neovim)
+1) Download and install iTerm2 (brew install --cask iterm2) and NeoVim (MAC:brew install neovim, On Ubuntu you need to build nvim from source to get the latest version: `sudo apt install gcc`, `pip install cmake` then follow instructions [here](https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites))
 2) Run the following to install nvim-plug for managing plugins:
 ```
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -8,10 +8,11 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 3) Install the JetBrains throuh `Font Book` and set it as the font in iTerm2
 4) install git and do `git config --global credential.helper store`
 5) Create a folder under ```~/.config/nvim``` and place the ```init.vim``` file there.
-6) Install nodejs (MAC: brew install node, UBUNTU: sudo apt install nodejs)
-7) Install npm and yarn (sudo apt install npm, npm install --global yarn)
-8) Open with NVIM (will get some errors) and run ```:PlugInstall```
-9) Set key bindings in iTerm2 :
+6) Install nodejs (MAC: brew install node, UBUNTU: `curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -`, `sudo apt install -y nodejs`)
+7) Install npm and yarn (npm install --global yarn)
+
+9) Open with NVIM (will get some errors) and run ```:PlugInstall```
+10) Set key bindings in iTerm2 :
 <img width="413" alt="image" src="https://user-images.githubusercontent.com/16506713/201479613-dec9c091-431e-4d41-a95a-b32d621dbb2e.png">
 10) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
 
