@@ -18,7 +18,7 @@ You need to install the extentions you need for the language you are using, my s
 ```:CocInstall coc-python``` for python
 11) Set key bindings in iTerm2 :
 <img width="413" alt="image" src="https://user-images.githubusercontent.com/16506713/201479613-dec9c091-431e-4d41-a95a-b32d621dbb2e.png">
-12) run `brew install the_silver_searcher`, this is needed for CtrSF and add the below to .zshrc
+12) Install silver searcher (MAC:`brew install the_silver_searcher`, Ubuntu:`sudo apt-get install silversearcher-ag`) this is needed for CtrSF and add the below to .zshrc
 
 ```
 #determines search program for fzf
