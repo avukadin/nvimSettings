@@ -7,6 +7,9 @@
 :set softtabstop=4
 :set mouse=a
 :set encoding=UTF-8
+" Coc Related
+:set updatetime=300
+:set signcolumn=yes
 
 call plug#begin()
 
@@ -79,6 +82,18 @@ inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<
 nnoremap <c-s> :vsp<cr>
 " Get variable/function info
 nnoremap <silent> K :call CocActionAsync("doHover")<CR>
+" Formatting selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s)
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
 " Exit insert mode
 inoremap jj <ESC>
 " :OR command to organize imports
