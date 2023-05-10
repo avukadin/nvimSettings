@@ -12,10 +12,8 @@
 :set signcolumn=yes
 
 call plug#begin()
-
 " Search within files 
 Plug 'dyng/ctrlsf.vim'
-
 " Fuzzy file search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -61,8 +59,10 @@ Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'mfussenegger/nvim-dap-python'
 
-call plug#end()
+Plug 'ARM9/arm-syntax-vim'
 
+call plug#end()
+au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
 " Custom keymaps
 nnoremap <F7> :NvimTreeToggle<cr>
 nmap <F8> :TagbarToggle<CR>
@@ -105,14 +105,14 @@ nnoremap <F10> :lua require'dap'.step_over()<cr>
 nnoremap <F11> :lua require'dap'.step_into()<cr>
 nnoremap <F6> :lua require'dap'.repl.open()<cr>
 " Color scheme
-colorscheme carbonfox
-" colorscheme tokyonight-night
+" colorscheme carbonfox
+colorscheme tokyonight-night
 " colorscheme catppuccin
 set termguicolors     " enable true colors support
 " let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+" colorscheme ayu
 
 " Copy to system clipboard
 set clipboard=unnamedplus
