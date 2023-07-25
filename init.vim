@@ -105,7 +105,7 @@ nnoremap <F10> :lua require'dap'.step_over()<cr>
 nnoremap <F11> :lua require'dap'.step_into()<cr>
 nnoremap <F6> :lua require'dap'.repl.open()<cr>
 " Color scheme
-" colorscheme carbonfox
+"colorscheme carbonfox
 colorscheme tokyonight-night
 " colorscheme catppuccin
 set termguicolors     " enable true colors support
@@ -119,12 +119,12 @@ set clipboard=unnamedplus
 
 " Prettier
 " Run Prettier on Save
-let g:prettier#autoformat = 1
-let g:prettier#partial_format=1
-let g:prettier#autoformat_require_pragma = 0
-let g:prettier#exec_cmd_async = 1
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" let g:prettier#autoformat = 1
+" let g:prettier#partial_format=1
+" let g:prettier#autoformat_require_pragma = 0
+" let g:prettier#exec_cmd_async = 1
+" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Nvim tree settings
 :lua require("nvim-tree").setup({ reload_on_bufenter = true, update_focused_file = {enable = true, update_root = false, ignore_list = {} } ,actions={ open_file={quit_on_open=true}}})
@@ -180,56 +180,3 @@ let g:tagbar_type_typescriptreact = {
 " Settings
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
-
-" Debugging
-" Python
-lua <<EOF
-require('dap-python').setup('~/environments/debugpy/bin/python') 
-require('dapui').setup()
-require ('nvim-dap-virtual-text').setup()
-local dap, dapui = require("dap"), require("dapui")
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
-EOF
-" React
-lua <<EOF
-local dap = require('dap')
-dap.adapters.chrome = {
-    type = "executable",
-    command = "node",
-    args = {os.getenv("HOME") .. "/Projects/vscode-chrome-debug/out/src/chromeDebug.js"} -- TODO adjust
-}
-
-dap.configurations.javascriptreact = { -- change this to javascript if needed
-    {
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        webRoot = "${workspaceFolder}"
-    }
-}
-
-dap.configurations.typescriptreact = { -- change to typescript if needed
-    {
-        type = "chrome",
-        request = "attach",
-        program = "${file}",
-        cwd = vim.fn.getcwd(),
-        sourceMaps = true,
-        protocol = "inspector",
-        port = 9222,
-        webRoot = "${workspaceFolder}"
-    }
-}
-EOF
