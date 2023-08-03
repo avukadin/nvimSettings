@@ -94,6 +94,8 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
+" Dont yank on line delete
+nnoremap p "0p
 " Exit insert mode
 inoremap jj <ESC>
 " :OR command to organize imports
