@@ -7,8 +7,9 @@
 :set softtabstop=4
 :set mouse=a
 :set encoding=UTF-8
+
 " Coc Related
-:set updatetime=300
+:set updatetime=30
 :set signcolumn=yes
 
 call plug#begin()
@@ -28,7 +29,7 @@ Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/ap/vim-css-color' 
 
 " Auto completion
-Plug 'https://github.com/neoclide/coc.nvim'  
+"Plug 'https://github.com/neoclide/coc.nvim'  
 
 " Tagbar for code navidation
 Plug 'https://github.com/preservim/tagbar' 
@@ -38,7 +39,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 
 " Code formatting
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+Plug 'sbdchd/neoformat'
 
 " Git status
 Plug 'airblade/vim-gitgutter'
@@ -52,6 +53,8 @@ Plug 'ayu-theme/ayu-vim'
 " Show code context
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+
+Plug 'https://github.com/github/copilot.vim'
 
 " Debugging
 Plug 'mfussenegger/nvim-dap'
@@ -85,6 +88,12 @@ nnoremap <silent> K :call CocActionAsync("doHover")<CR>
 " Formatting selected code
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+" Copilot ctrl-j to accept
+" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" let g:copilot_no_tab_map = v:true
+
+" Run the typer code
+command! Typethis lua require"typer".type()
 
 augroup mygroup
   autocmd!
@@ -94,9 +103,9 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Dont yank on line delete
-nnoremap p "0p
-" Exit insert mode
+"Format Code
+nnoremap <c-f> :Neoformat<cr>
+" exit insert mode
 inoremap jj <ESC>
 " :OR command to organize imports
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
@@ -118,15 +127,6 @@ let ayucolor="mirage" " for mirage version of theme
 
 " Copy to system clipboard
 set clipboard=unnamedplus
-
-" Prettier
-" Run Prettier on Save
-" let g:prettier#autoformat = 1
-" let g:prettier#partial_format=1
-" let g:prettier#autoformat_require_pragma = 0
-" let g:prettier#exec_cmd_async = 1
-" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
-" command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Nvim tree settings
 :lua require("nvim-tree").setup({ reload_on_bufenter = true, update_focused_file = {enable = true, update_root = false, ignore_list = {} } ,actions={ open_file={quit_on_open=true}}})
