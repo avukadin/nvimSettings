@@ -578,15 +578,13 @@ cmp.setup {
   },
 }
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
-
 -- Custom Keymaps
 vim.keymap.set("i", "jj", "<Esc>")
 vim.keymap.set("n", "<F7>", ":NvimTreeToggle<cr>")
+
+-- Copilot set accept key
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', {expr=true, silent=true})
 vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap('n', ':OR', ':PyrightOrganizeImports<CR>', { noremap = true, silent = true })
 
 -- Custom background colour
 vim.cmd[[hi Normal guibg=#090B17]]
