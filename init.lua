@@ -181,7 +181,6 @@ require('lazy').setup({
   --   main = 'ibl',
   --   opts = {},
   -- },
-  {'kyazdani42/nvim-tree.lua'},
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -231,6 +230,25 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+  },
+  {
+    'kyazdani42/nvim-tree.lua',
+    config = function()
+      vim.keymap.set("n", "<F7>", ":NvimTreeToggle<cr>")
+      require("nvim-tree").setup({
+        reload_on_bufenter = true,
+        update_focused_file = {
+          enable = true,
+          update_root = false,
+          ignore_list = {}
+        },
+        actions = {
+          open_file = {
+            quit_on_open = true
+          }
+        }
+      })
+    end
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -580,7 +598,6 @@ cmp.setup {
 
 -- Custom Keymaps
 vim.keymap.set("i", "jj", "<Esc>")
-vim.keymap.set("n", "<F7>", ":NvimTreeToggle<cr>")
 
 -- Copilot set accept key
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', {expr=true, silent=true})
@@ -599,5 +616,3 @@ vim.cmd[[hi SignColumn guibg=#090B17]]
 
 -- Re-open at last position
 vim.cmd [[ au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]]
-
-require("nvim-tree").setup({ reload_on_bufenter = true, update_focused_file = {enable = true, update_root = false, ignore_list = {} } ,actions={ open_file={quit_on_open=true}}})
