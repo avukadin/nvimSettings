@@ -42,6 +42,10 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.wo.relativenumber = true
+
+vim.cmd("command! TypeThis lua require'typer'.typeItOut()")
+
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -64,6 +68,8 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
+--- Neovim LSP configuration
+
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -93,20 +99,20 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-    },
+   {
+     -- Autocompletion
+     'hrsh7th/nvim-cmp',
+     dependencies = {
+       -- Snippet Engine & its associated nvim-cmp source
+       'L3MON4D3/LuaSnip',
+       'saadparwaiz1/cmp_luasnip',
+  
+       -- Adds LSP completion capabilities
+       'hrsh7th/cmp-nvim-lsp',
+  
+       -- Adds a number of user-friendly snippets
+       'rafamadriz/friendly-snippets',
+     },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -171,8 +177,21 @@ require('lazy').setup({
         section_separators = '',
       },
       sections = {
-        lualine_c = {'%f'},
-      }
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {{ 'filename', path = 1 }}, -- This line sets the full path
+        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+      },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {{ 'filename', path = 1 }}, -- Also sets full path for inactive windows
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+    },
     },
   },
 
@@ -600,7 +619,10 @@ cmp.setup {
 }
 
 -- Custom Keymaps
-vim.keymap.set("i", "jj", "<Esc>")
+-- vim.keymap.set("i", "jj", "<Esc>")
+
+-- Center screen after jumping to mark
+-- vim.o.scrolloff = 999
 
 -- Copilot set accept key
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', {expr=true, silent=true})
