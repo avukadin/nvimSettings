@@ -80,6 +80,12 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  {'nvim-treesitter/nvim-treesitter-context', config = function()
+    require('treesitter-context').setup({
+      enable = false, -- This disables the treesitter context
+    })
+  end},
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -627,6 +633,9 @@ cmp.setup {
 -- Copilot set accept key
 vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', {expr=true, silent=true})
 vim.g.copilot_no_tab_map = true
+
+-- Toggle treesitter-context
+vim.api.nvim_set_keymap('n', '<C-g>', ':TSContextToggle<CR>', {noremap = true, silent = true})
 
 -- Custom background colour
 vim.cmd[[hi Normal guibg=#090B17]]
