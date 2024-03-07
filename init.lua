@@ -278,6 +278,94 @@ require('lazy').setup({
       })
     end
   },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup({
+        layouts = {
+                {
+                  elements = {
+                    'scopes',
+                    'breakpoints',
+                    'stacks',
+                  },
+                  size = 40, -- The size of the layout
+                  position = 'left', -- The position of the layout
+                },
+                {
+                  elements = {
+                    'repl',
+                  },
+                  size = 10, -- The size of the layout
+                  position = 'bottom', -- The position of the layout
+                },
+                -- Add more layouts as needed
+              },
+      })
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end
+  },
+  {"mfussenegger/nvim-dap",},
+  {"mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = {"mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui"},
+      config = function(_, opts)
+        local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+        require("dap-python").setup(path)
+        require('dap').configurations.python = {
+          {
+            type = 'python',
+            request = 'launch',
+            name = "Launch Python file",
+            program = "${file}", -- This variable dynamically refers to the currently open file in Neovim
+          },
+          {
+            type = 'python',
+            request = 'attach',
+            connect = {
+              port = 5681,
+              host = "localhost",
+            },
+            name = "AR Insights",
+            pathMappings = {
+            {
+              localRoot = "${workspaceFolder}", -- Your local project root
+              remoteRoot = "/app" -- Corresponding remote path
+            },
+            -- Add additional mappings as needed
+          },
+          },
+          {
+            type = 'python',
+            request = 'attach',
+            connect = {
+              port = 5678,
+              host = "localhost",
+            },
+            name = "AR Insights Worker",
+            pathMappings = {
+            {
+              localRoot = "${workspaceFolder}", -- Your local project root
+              remoteRoot = "/app" -- Corresponding remote path
+            },
+            -- Add additional mappings as needed
+          },
+
+          }
+        }
+      end,
+    },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -552,7 +640,9 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require("neodev").setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -637,6 +727,12 @@ vim.g.copilot_no_tab_map = true
 -- Toggle treesitter-context
 vim.api.nvim_set_keymap('n', '<C-g>', ':TSContextToggle<CR>', {noremap = true, silent = true})
 
+-- DAP keymaps
+vim.api.nvim_set_keymap('n', '<F5>', "<Cmd>lua require'dap'.continue()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F10>', "<Cmd>lua require'dap'.step_over()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F11>', "<Cmd>lua require'dap'.step_into()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F4>', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F12>', '<cmd>lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
 
 -- Custom background colour
 vim.cmd[[hi Normal guibg=#090B17]]
