@@ -637,6 +637,7 @@ vim.g.copilot_no_tab_map = true
 -- Toggle treesitter-context
 vim.api.nvim_set_keymap('n', '<C-g>', ':TSContextToggle<CR>', {noremap = true, silent = true})
 
+
 -- Custom background colour
 vim.cmd[[hi Normal guibg=#090B17]]
 vim.cmd[[hi NormalNC guibg=#090B17]]
@@ -650,3 +651,4 @@ vim.cmd[[hi SignColumn guibg=#090B17]]
 
 -- Re-open at last position
 vim.cmd [[ au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]]
+
