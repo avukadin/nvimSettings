@@ -344,7 +344,7 @@ require('lazy').setup({
               remoteRoot = "/app" -- Corresponding remote path
             },
             -- Add additional mappings as needed
-          },
+            },
           },
           {
             type = 'python',
@@ -360,8 +360,39 @@ require('lazy').setup({
               remoteRoot = "/app" -- Corresponding remote path
             },
             -- Add additional mappings as needed
+            },
           },
-
+          {
+            type = 'python',
+            request = 'attach',
+            connect = {
+              port = 5678,
+              host = "localhost",
+            },
+            name = "API",
+            pathMappings = {
+            {
+              localRoot = "${workspaceFolder}", -- Your local project root
+              remoteRoot = "/usr/src/app" -- Corresponding remote path
+            },
+            -- Add additional mappings as needed
+            },
+          },
+          {
+            type = 'python',
+            request = 'attach',
+            connect = {
+              port = 5679,
+              host = "localhost",
+            },
+            name = "API Worker",
+            pathMappings = {
+            {
+              localRoot = "${workspaceFolder}", -- Your local project root
+              remoteRoot = "/usr/src/app" -- Corresponding remote path
+            },
+            -- Add additional mappings as needed
+            },
           }
         }
       end,
