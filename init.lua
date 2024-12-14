@@ -448,19 +448,14 @@ require('lazy').setup({
 }, {})
 
 
--- Configure Rust Analyzer to analyze code when going into normal mode
-local lspconfig = require('lspconfig')
-lspconfig.rust_analyzer.setup({
-    on_attach = function(client, bufnr)
-        -- Trigger diagnostics on InsertLeave (switching to normal mode)
-        vim.api.nvim_create_autocmd("InsertLeave", {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.code_action()  -- Optional: Trigger code actions if needed
-                vim.lsp.buf.document_highlight()  -- Optional: Document highlight update
-            end,
-        })
+-- Autosave on switch to normal mode for rust
+vim.api.nvim_create_autocmd("InsertLeave", {
+    pattern = "*.rs",
+    callback = function()
+        -- Simulate typing :w and pressing Enter
+        vim.api.nvim_feedkeys(":w\n", "n", false)
     end,
+    desc = "Simulate typing :w and pressing Enter for Rust files",
 })
 
 -- [[ Setting options ]]
