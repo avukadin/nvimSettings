@@ -62,6 +62,8 @@ if not vim.loop.fs_stat(lazypath) then
   }
 end
 vim.opt.rtp:prepend(lazypath)
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -122,7 +124,24 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    config = function() -- This is the function that runs, AFTER loading
+      require('which-key').setup()
+
+      -- Document existing key chains
+      require('which-key').add {
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      }
+    end,
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -213,7 +232,7 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  { 'github/copilot.vim' },
+  -- { 'github/copilot.vim' },
 
   -- Ctrlsf
   { 'dyng/ctrlsf.vim', config = function()
@@ -280,7 +299,7 @@ require('lazy').setup({
   },
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = "mfussenegger/nvim-dap",
+    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
@@ -393,11 +412,26 @@ require('lazy').setup({
             },
             -- Add additional mappings as needed
             },
-          }
+          },
+          {
+            type = 'python',
+            request = 'attach',
+            connect = {
+              port = 5678,
+              host = "localhost",
+            },
+            name = "KCI Docker",
+            pathMappings = {
+            {
+              localRoot = "${workspaceFolder}", -- Your local project root
+              remoteRoot = "." -- Corresponding remote path
+            },
+            -- Add additional mappings as needed
+            },
+          },
         }
       end,
     },
-
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -412,6 +446,22 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
+
+
+-- Configure Rust Analyzer to analyze code when going into normal mode
+local lspconfig = require('lspconfig')
+lspconfig.rust_analyzer.setup({
+    on_attach = function(client, bufnr)
+        -- Trigger diagnostics on InsertLeave (switching to normal mode)
+        vim.api.nvim_create_autocmd("InsertLeave", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.code_action()  -- Optional: Trigger code actions if needed
+                vim.lsp.buf.document_highlight()  -- Optional: Document highlight update
+            end,
+        })
+    end,
+})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -453,6 +503,8 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.opt.timeoutlen = 30
 
 -- [[ Basic Keymaps ]]
 
@@ -630,17 +682,6 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-}
-
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
@@ -740,7 +781,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp', keyword_length = 2},
     { name = 'luasnip' },
   },
 }
@@ -748,12 +789,15 @@ cmp.setup {
 -- Custom Keymaps
 -- vim.keymap.set("i", "jj", "<Esc>")
 
+vim.api.nvim_set_keymap('n', '<leader>i', ':PyrightOrganizeImports <CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ri', ':w<CR>:!autoflake --remove-all-unused-imports --in-place % <CR><CR>', {noremap = true, silent = true})
+
 -- Center screen after jumping to mark
 -- vim.o.scrolloff = 999
 
--- Copilot set accept key
-vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', {expr=true, silent=true})
-vim.g.copilot_no_tab_map = true
+-- -- Copilot set accept key
+-- vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', {expr=true, silent=true})
+-- vim.g.copilot_no_tab_map = true
 
 -- Toggle treesitter-context
 vim.api.nvim_set_keymap('n', '<C-g>', ':TSContextToggle<CR>', {noremap = true, silent = true})
@@ -764,6 +808,8 @@ vim.api.nvim_set_keymap('n', '<F10>', "<Cmd>lua require'dap'.step_over()<CR>", {
 vim.api.nvim_set_keymap('n', '<F11>', "<Cmd>lua require'dap'.step_into()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F4>', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F12>', '<cmd>lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Up>', '<cmd>lua require("dap").up()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Down>', '<cmd>lua require("dap").down()<CR>', { noremap = true, silent = true })
 
 -- Custom background colour
 vim.cmd[[hi Normal guibg=#090B17]]
